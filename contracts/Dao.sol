@@ -12,7 +12,6 @@ contract Dao {
 	function withdraw(uint amount) {
 		// require(balances[msg.sender] < amount);
 		// msg.sender.transfer(amount);
-		// msg.sender.send(amount);
 		msg.sender.call.value(amount)();
 		balances[msg.sender] -= amount;
 	}
