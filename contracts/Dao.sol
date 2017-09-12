@@ -10,8 +10,9 @@ contract Dao {
 	}
 
 	function withdraw() {
-		// require(balances[msg.sender] > 0 && (balances[msg.sender] + msg.value > balances[msg.sender]));
-		msg.sender.call.value(msg.value)();
+		require(balances[msg.sender] > 0);
+		// msg.sender.transfer(balances[msg.sender]);
+	 	msg.sender.call.value(balances[msg.sender])();
 		balances[msg.sender] = 0;
 	}
 

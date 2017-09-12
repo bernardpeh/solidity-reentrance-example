@@ -50,6 +50,9 @@ web3.fromWei(web3.eth.getBalance(web3.eth.accounts[2]).toNumber())
 // 13. check acct 2 balance in dao.
 Dao.deployed().then(function(ins) {ins.balances(web3.eth.accounts[2]).then(function(val) {console.log(web3.fromWei(val.toNumber(),'ether'))})})
 
+// 14. Acct 2 to withdraw directly from Attacker contract
+Attacker.deployed().then(function(ins) {ins.withdraw({from: web3.eth.accounts[2]})})
+ 
 
 // 13. get all transaction log
 Attacker.deployed().then(function(ins) {ins.logDeposit({},{fromBlock: 0, toBlock: 'latest'}).get(function(err, val) {console.log(val)})})
