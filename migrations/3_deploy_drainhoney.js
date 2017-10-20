@@ -1,8 +1,6 @@
-var drainHoney = artifacts.require("./DrainHoney.sol");
-var honeypot = artifacts.require("./HoneyPot.sol");
-
-honeyAddress = honeypot.deployed().address;
+var dh = artifacts.require("./DrainHoney.sol");
+var hp = artifacts.require("./HoneyPot.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(drainHoney, honeyAddress);
+  deployer.deploy(dh, hp.deployed().then(ins => {return ins.address}));
 };

