@@ -23,7 +23,7 @@ contract Store {
     // function needs to be payable
     function purchase(uint id) payable returns (bool success) {
         // send might fail and we still ship. In older version, we could do if and throw.
-        // In current solidity, we could just use transfer.
+        // In current version, we could just use transfer.
         // wallet.send(msg.value);
         wallet.transfer(msg.value);
 
